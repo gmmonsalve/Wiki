@@ -9,15 +9,19 @@ def index(request):
         "entries": util.list_entries()
     })
 
+def edit_md(request):
+    return render(request,"encyclopedia/edit.html")
+
 def page_redirect(request,name):
-    page = name.lower()
-    md = util.get_entry(page)
+    md = util.get_entry(name)
     if md is not None:
         html = markdown2.markdown(md)
         return render(request,"encyclopedia/page.html",{
-            "page": html
+            "page": html,
+            "title": name
         })
     else:
         return render(request,"encyclopedia/page.html",{
-            "page": "Not found :c"
+            "page": "<h1>Page Not found</h1>"
         })
+
