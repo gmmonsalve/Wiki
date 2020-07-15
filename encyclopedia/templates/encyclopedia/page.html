@@ -1,7 +1,15 @@
 {% extends "encyclopedia/layout.html" %}
+{% block title%}
+   Wiki/{{ title }}
+{% endblock %}
 
 {% block body %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" href="{% url 'edit_md' %}">edit this page</a>
+    </li>
+  </ul>
 <div class="container">
-    {{ page }}
+    {{ page|safe }}
 </div>
 {% endblock %}
