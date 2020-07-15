@@ -5,12 +5,15 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>All Pages</h1>
 
     <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+            <li><a href="{% url 'page_redirect' name=entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
+</div>
+   
 
 {% endblock %}
