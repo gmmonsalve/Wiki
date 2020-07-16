@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search:{{ search }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Results for '{{ search }}':</h1>
+    <ul>
+        {% if entries %}
+        {% for entry in entries %}
+            <li><a href="{% url 'page_redirect' name=entry %}">{{ entry }}</a></li>
+        {% endfor %}
+        {% else %}
+            <h2>There is not results for this search :(</h2>
+        {%endif%}
+    </ul>
+</div>
+{% endblock %}
