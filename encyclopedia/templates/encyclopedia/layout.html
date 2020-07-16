@@ -13,12 +13,12 @@
             <div class="sidebar col-lg-2 col-md-3 border-right">
                 <h2 class="text-center mb-3" style="font-family: 'Times New Roman', Times, serif;">Wiki</h2>
                 <div class="container">
-                    <form>
+                    {% csrf_token %}
+                    <form action="{% url 'search' %}" method="GET">
                         <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
                     </form>
                 </div>
-               
-                <div class="container mt-5">
+                <div class="container mt-3">
                     <a href="{% url 'index' %}">Home</a>
                 </div>
                 <div class="container">
