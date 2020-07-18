@@ -1,12 +1,29 @@
 {% extends 'encyclopedia/index.html' %}
 
 {% block title%}
-    edit:
+    Edit : {{ title }}
 {% endblock%}
 
 {% block body %}
-<div class="form-group">
-    <label for="exampleFormControlTextarea1">Edit</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" cols="2"></textarea>
+{% if content %}
+<div class="container">
+  <div class="form-group">
+    <h1>Editing {{ title }} content.</h1>
+    <form action="{% url 'save_changes' page_name=title %}" method="POST" >{% csrf_token %}
+      <textarea class="form-control" name="md" id="md" rows="15" cols="2">{{ content }}</textarea>
+        <button type="submit">Save changes</button>
+        <a class="btn" href="{% url 'page_redirect' name=title %}" style="float: right;">cancel</a>
+      
+    </form>
   </div>
+ 
+  
+</div>
+{% else %}
+<div class="container">
+  <h1>This url does not exist 😔</h1>
+  <p>You are trying to edit a page that does not exist 👻!</p>
+</div>
+  
+{% endif %}
 {% endblock %}
