@@ -12,8 +12,23 @@ def index(request):
         "entries": util.list_entries(),
     })
 
-def edit_md(request):
-    return render(request,"encyclopedia/edit.html")
+def edit(request,page):
+    content = util.get_entry(page)
+    return render(request,"encyclopedia/edit.html",{
+        "title": page,
+        "content": content
+    })
+   
+
+def save_changes(request, page_name):
+    content = request.POST.get("md", None)
+    if content:
+        util.save_entry(page_name,content)
+        return redirect('page_redirect', name=page_name)
+    else:
+        redirect('index')
+       
+
 
 def page_redirect(request,name):
     md = util.get_entry(name)
