@@ -7,6 +7,6 @@ Project 1 - Wiki made with Django.
 - [x] Index page
 - [x] Search: query
 - [ ] Create new pages
-- [ ] Edit pages
+- [x] Edit pages
 - [ ] Random pages
 - [x] Markdown to HTML conversion
