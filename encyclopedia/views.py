@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django import forms
 from . import util
 from django.urls import reverse
+from django.contrib import messages
 import markdown2
 
 
@@ -59,3 +60,14 @@ def search(request):
             })
     else:
         return redirect('index')
+
+def create(request):
+    title = request.POST.get("title",None)
+    content = request.POST.get("entry",None)
+    if title and content:
+        if title in util.list_entries():
+            messages.error(request, 'This entry already exists')
+        else:
+            util.save_entry(title,content)
+            return redirect('index')
+    return render(request,"encyclopedia/create.html")
