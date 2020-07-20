@@ -1,4 +1,4 @@
-{% extends 'encyclopedia/index.html' %}
+{% extends "encyclopedia/layout.html" %}
 
 {% block title%}
     Edit : {{ title }}
@@ -9,7 +9,8 @@
 <div class="container">
   <div class="form-group">
     <h1>Editing {{ title }} content.</h1>
-    <form action="{% url 'save_changes' page_name=title %}" method="POST" >{% csrf_token %}
+    <form action="{% url 'save_changes' page_name=title %}" method="POST" >
+      {% csrf_token %}
       <textarea class="form-control" name="md" id="md" rows="15" cols="2">{{ content }}</textarea>
        <div class="mt-2">
         <button type="submit" class="btn btn-primary" style="float: right;">Save changes</button>
