@@ -8,5 +8,5 @@ Project 1 - Wiki made with Django.
 - [x] Search: query
 - [x] Create new pages
 - [x] Edit pages
-- [ ] Random pages
+- [x] Random pages
 - [x] Markdown to HTML conversion
