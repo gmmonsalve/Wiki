@@ -6,7 +6,7 @@ from . import util
 from django.urls import reverse
 from django.contrib import messages
 import markdown2
-
+import random
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -71,3 +71,7 @@ def create(request):
             util.save_entry(title,content)
             return redirect('index')
     return render(request,"encyclopedia/create.html")
+
+def rand(request):
+    random_entry = random.choice(util.list_entries())
+    return redirect('page_redirect',name=random_entry)
