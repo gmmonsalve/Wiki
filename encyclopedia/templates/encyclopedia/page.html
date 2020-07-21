@@ -1,14 +1,16 @@
 {% extends "encyclopedia/layout.html" %}
-{% block title%}
+{% block title %}
    Wiki - {{ title }}
 {% endblock %}
 
 {% block body %}
+{% if not empty %}
 <ul class="nav justify-content-end">
     <li class="nav-item">
       <a class="nav-link active" href="{% url 'edit' page=title %}">edit this page</a>
     </li>
   </ul>
+{% endif %}
 <div class="container">
     {{ page|safe }}
 </div>
