@@ -35,15 +35,16 @@ def page_redirect(request,name):
     md = util.get_entry(name)
     if md:
         html = markdown2.markdown(md)
-        title = name
-    else:
-        html = "<h1>Page Not found</h1>"
-        title = "Page not found"
-
-    return render(request,"encyclopedia/page.html",{
+        return render(request,"encyclopedia/page.html",{
             "page": html,
-            "title": title
-    })
+            "title": name
+        })
+    else:
+        return render(request,"encyclopedia/page.html",{
+            "page": "<h1>Page Not found</h1>",
+            "title": "Page not found",
+            "empty": True
+        })
    
 
 def search(request):
