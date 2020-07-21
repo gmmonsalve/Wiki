@@ -13,6 +13,7 @@ def index(request):
         "entries": util.list_entries(),
     })
 
+
 def edit(request,page):
     content = util.get_entry(page)
     return render(request,"encyclopedia/edit.html",{
@@ -27,27 +28,27 @@ def save_changes(request, page_name):
         util.save_entry(page_name,content)
         return redirect('page_redirect', name=page_name)
     else:
-        redirect('index')
+        return redirect('index')
        
-
 
 def page_redirect(request,name):
     md = util.get_entry(name)
-    if md is not None:
+    if md:
         html = markdown2.markdown(md)
-        return render(request,"encyclopedia/page.html",{
-            "page": html,
-            "title": name
-        })
+        title = name
     else:
-        return render(request,"encyclopedia/page.html",{
-            "page": "<h1>Page Not found</h1>"
-        })
+        html = "<h1>Page Not found</h1>"
+        title = "Page not found"
+
+    return render(request,"encyclopedia/page.html",{
+            "page": html,
+            "title": title
+    })
+   
 
 def search(request):
-    q = request.GET.get("q", None)
-    if q:
-        search = q
+    search = request.GET.get("q", None)
+    if search:
         content = util.list_entries()
         result = [i for i in content if search.lower() in i.lower() or search.upper() in i.upper()] 
         print(result)
@@ -61,6 +62,7 @@ def search(request):
     else:
         return redirect('index')
 
+
 def create(request):
     title = request.POST.get("title",None)
     content = request.POST.get("entry",None)
@@ -69,8 +71,9 @@ def create(request):
             messages.error(request, 'This entry already exists')
         else:
             util.save_entry(title,content)
-            return redirect('index')
+            return redirect('page_redirect',name=title)
     return render(request,"encyclopedia/create.html")
+
 
 def rand(request):
     random_entry = random.choice(util.list_entries())
