@@ -14,7 +14,7 @@
                 <h2 class="text-center mb-3" style="font-family: 'Times New Roman', Times, serif;">Wiki</h2>
                 <div class="container">
                     {% csrf_token %}
-                    <form action="{% url 'search' %}" method="GET">
+                    <form action="{% url 'search' %}" method="GET" autocomplete="off">
                         <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
                     </form>
                 </div>

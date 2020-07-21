@@ -13,7 +13,7 @@
 {% endfor %}
 {% endif%}
 <h1>Create an entry!</h1>
-    <form action="{% url 'create' %}" method="POST"> 
+    <form action="{% url 'create' %}" method="POST" autocomplete="off"> 
         {% csrf_token %}
         <input style="min-width: 30%;" type="text" class="form-contro mb-3" name="title" id="title" placeholder="Type the name for the new entry">
         <textarea class="form-control" name="entry" id="entry" rows="15" cols="2"></textarea> 
